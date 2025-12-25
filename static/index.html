@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceVault - English Speaking Practice</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎙️ VoiceVault</h1>
+            <p class="subtitle">Practice your English speaking</p>
+        </header>
+
+        <main>
+            <!-- Recording Section -->
+            <section class="recording-section">
+                <div id="status" class="status ready">Ready to record</div>
+                <button id="recordBtn" class="record-btn">
+                    <span class="btn-icon">🎤</span>
+                    <span class="btn-text">Start Recording</span>
+                </button>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results" class="results hidden">
+                <div class="result-card">
+                    <h2>📝 Your Speech</h2>
+                    <div id="transcript" class="transcript"></div>
+                </div>
+
+                <div class="result-card">
+                    <h2>💡 AI Feedback</h2>
+                    <div id="feedback" class="feedback"></div>
+                </div>
+
+                <div id="savedPath" class="saved-path"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>All practice records saved locally as Markdown</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
