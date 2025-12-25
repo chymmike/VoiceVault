@@ -76,6 +76,32 @@ def get_ai_feedback(transcript: str) -> str:
         return f"(AI feedback error: {e})"
 
 # =============================================================================
+# Markdown Storage
+# =============================================================================
+
+def save_to_markdown(transcript: str, feedback: str) -> str:
+    """Save practice session to markdown file"""
+    os.makedirs('practice_logs', exist_ok=True)
+    
+    today = datetime.now().strftime('%Y-%m-%d')
+    filepath = f'practice_logs/{today}.md'
+    
+    # If first session of the day, add date header
+    if not os.path.exists(filepath):
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(f'# {today}\n\n')
+    
+    # Append session
+    with open(filepath, 'a', encoding='utf-8') as f:
+        time_now = datetime.now().strftime('%H:%M')
+        f.write(f'## Practice Session - {time_now}\n\n')
+        f.write(f'### User\'s Speech\n{transcript}\n\n')
+        f.write(f'### AI Feedback\n{feedback}\n\n')
+        f.write('---\n\n')
+    
+    return filepath
+
+# =============================================================================
 # Routes
 # =============================================================================
 
@@ -111,8 +137,9 @@ def upload_audio():
         feedback = get_ai_feedback(transcript)
         print("✅ AI feedback received!")
         
-        # TODO: Sprint 5 - Save to markdown
-        saved_to = None
+        # Save to markdown
+        saved_to = save_to_markdown(transcript, feedback)
+        print(f"💾 Saved to: {saved_to}")
         
         return jsonify({
             'transcript': transcript,
