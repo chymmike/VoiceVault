@@ -126,7 +126,7 @@ def upload_audio():
     audio_file.save(temp_filename)
     
     try:
-        # Whisper transcription
+        # Whisper transcription (本地)
         print(f"🎤 Transcribing: {temp_filename}")
         result = whisper_model.transcribe(temp_filename, language='en')
         transcript = result['text'].strip()
@@ -168,4 +168,3 @@ if __name__ == '__main__':
     
     # Run dev server
     app.run(debug=True, port=5000)
-
