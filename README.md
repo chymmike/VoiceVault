@@ -1,57 +1,126 @@
 # 🎙️ VoiceVault
 
-一個本地運行的英文口說練習 App，使用 Whisper 進行語音辨識，Gemini 提供 AI 反饋，並將記錄儲存為 Markdown。
+**AI feedback on your speaking. Saved locally. Analyze anytime.**
 
-## ✨ 特色
+A local-first English speaking practice app. Record yourself, get instant AI corrections, and own all your data as Markdown files.
 
-- **本地語音辨識** - Whisper 在本地運行，隱私優先
-- **AI 反饋** - Gemini 提供文法修正 + 道地表達建議
-- **Markdown 記錄** - 所有練習自動存成 Markdown，可用 Obsidian 管理
 
-## 🚀 快速開始
+## ✨ Features
 
-### 1. 安裝依賴
+### Core
+- 🎤 **Voice Recording** — Record directly in browser, no installs needed
+- 🤖 **AI Feedback** — Gemini 2.5 Flash (free tier) provides grammar corrections + natural expression suggestions
+- 📝 **Markdown Logs** — All sessions saved as local `.md` files (Obsidian-friendly)
+
+### Stats & Analytics
+- 🔥 **Streak Tracking** — See your consecutive practice days
+- 📊 **12-Week Heatmap** — GitHub-style activity visualization
+- ⏱️ **Practice Timer** — Live recording timer + daily totals
+
+### Tools
+- 📖 **Dictionary Lookup** — Search definitions, phonetics, and play pronunciations
+- 💾 **One-Click Open** — Click "Saved to" to open your logs folder
+
+---
+
+## 🚀 Quick Start
+
+### ⚠️ Python Version
+
+**Requires Python 3.9 or 3.10** — Whisper has compatibility issues with 3.11+.
+
+**macOS/Linux** — Use [pyenv](https://github.com/pyenv/pyenv):
+```bash
+pyenv install 3.10.14
+pyenv local 3.10.14
+```
+
+**Windows** — Use [pyenv-win](https://github.com/pyenv-win/pyenv-win) or download from [python.org](https://www.python.org/downloads/release/python-31014/).
+
+### 1. Clone & Install
 
 ```bash
-# 建立虛擬環境
+git clone https://github.com/chymmike/VoiceVault.git
+cd VoiceVault
+
+# Create virtual environment
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# 安裝套件
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2. 設定 API Key
+### 2. Configure API Key
 
 ```bash
 cp .env.example .env
-# 編輯 .env，填入你的 Gemini API Key
+# Edit .env and add your Gemini API key
 ```
 
-取得 API Key: https://aistudio.google.com/app/apikey
+Get your free API key: https://aistudio.google.com/app/apikey
 
-### 3. 啟動
+### 3. Run
 
 ```bash
 python app.py
 ```
 
-開啟瀏覽器訪問 http://localhost:5000
+Open http://localhost:5000 in your browser.
 
-## 📁 專案結構
+**For development (with hot reload):**
+```bash
+FLASK_DEBUG=1 python app.py
+```
+
+---
+
+## 📁 Project Structure
 
 ```
 VoiceVault/
-├── app.py              # Flask 主程式
-├── requirements.txt    # Python 依賴
-├── .env               # API keys (不要 commit)
+├── app.py              # Flask backend
+├── requirements.txt    # Python dependencies
+├── .env.example        # API key template
 ├── static/
-│   ├── index.html     # 前端頁面
-│   ├── style.css      # 樣式
-│   └── script.js      # 錄音邏輯
-└── practice_logs/     # Markdown 記錄
+│   ├── index.html      # Frontend UI
+│   ├── style.css       # Styling
+│   └── script.js       # Recording + UI logic
+└── practice_logs/      # Your Markdown logs (gitignored)
 ```
+
+---
+
+## 🔒 Privacy
+
+- **Whisper runs locally** — Your voice never leaves your machine
+- **Logs stay local** — All practice sessions stored as local Markdown files
+- **No tracking** — No analytics, no cookies, no user accounts
+
+Only transcripts are sent to Gemini API for feedback.
+
+> ⚠️ **Gemini API key is required** — Without it, you won't receive AI feedback (the core feature).
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|-----------|------------|
+| Speech-to-Text | [OpenAI Whisper](https://github.com/openai/whisper) (local) |
+| AI Feedback | [Google Gemini](https://ai.google.dev/) |
+| Backend | Flask (Python) |
+| Frontend | Vanilla HTML/CSS/JS |
+| Dictionary | [Free Dictionary API](https://dictionaryapi.dev/) |
+
+---
 
 ## 📝 License
 
-MIT
+[MIT](LICENSE) — Use freely, attribution appreciated.
+
+---
+
+## 🙋 Author
+
+Made by [chymmike](https://www.chymmike.com/) • [GitHub](https://github.com/chymmike)
