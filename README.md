@@ -10,7 +10,7 @@ A local-first English speaking practice app. Record yourself, get instant AI cor
 ### Core
 - 🎤 **Voice Recording** — Record directly in browser, no installs needed
 - 🤖 **AI Feedback** — Gemini 2.5 Flash (free tier) provides grammar corrections + natural expression suggestions
-- 📝 **Markdown Logs** — All sessions saved as local `.md` files (Obsidian-friendly)
+- 📝 **Markdown Logs** — All sessions saved as local `.md` files （AI-friendly)
 
 ### Stats & Analytics
 - 🔥 **Streak Tracking** — See your consecutive practice days
