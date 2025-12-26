@@ -4,7 +4,9 @@
 
 A local-first English speaking practice app. Record yourself, get instant AI corrections, and own all your data as Markdown files.
 
+![Main Interface](static/screenshots/main.png)
 
+![Heatmap Stats](static/screenshots/heatmap.png)
 ## ✨ Features
 
 ### Core
