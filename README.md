@@ -7,6 +7,8 @@ A local-first English speaking practice app. Record yourself, get instant AI cor
 ![Main Interface](static/screenshots/main.png)
 
 ![Heatmap Stats](static/screenshots/heatmap.png)
+
+![AI Feedback Demo](static/screenshots/demo.png)
 ## ✨ Features
 
 ### Core
