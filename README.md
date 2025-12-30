@@ -1,4 +1,4 @@
-# <img src="static/images/header-logo.png" width="36" align="middle"/> VoiceVault
+# <img src="static/images/header-logo.png" width="32" style="vertical-align: -4px;" /> VoiceVault
 
 **AI feedback on your speaking. Saved locally. Analyze anytime.**
 
@@ -150,4 +150,4 @@ Only transcripts are sent to Gemini API for feedback.
 
 ## 🙋 Author
 
-Made by [chymmike](https://www.chymmike.com/) • [GitHub](https://github.com/chymmike)
+Made by [Mike Chen](https://www.chymmike.com/) • [GitHub](https://github.com/chymmike)
