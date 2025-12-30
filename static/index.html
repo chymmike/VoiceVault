@@ -5,33 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoiceVault - English Speaking Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" type="image/jpeg" href="/static/images/favicon.jpg">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
     <div class="app-wrapper">
         <div class="container">
             <header>
-                <h1>🎙️ VoiceVault</h1>
+                <h1><img src="/static/images/header-logo.png" alt="VoiceVault" class="header-logo"> VoiceVault</h1>
                 <p class="subtitle">AI feedback on your speaking. Saved locally. Analyze anytime.</p>
                 <div id="headerStats" class="header-stats clickable" title="View practice stats">
-                    <span class="stat-item">🔥 <span id="streakCount">0</span>-day streak</span>
+                    <span class="stat-item"><span class="material-symbols-outlined icon-sm">local_fire_department</span>
+                        <span id="streakCount">0</span>-day streak</span>
                     <span class="stat-divider">•</span>
-                    <span class="stat-item">⏱️ <span id="weeklyMinutes">0</span>m this week</span>
+                    <span class="stat-item"><span class="material-symbols-outlined icon-sm">timer</span> <span
+                            id="weeklyMinutes">0</span>m this week</span>
                 </div>
             </header>
 
             <main>
                 <!-- Recording Section -->
                 <section class="recording-section">
-                    <div class="today-stats">
-                        <span class="today-label">⏱️ Today:</span>
-                        <span id="todayTotal" class="today-total">0:00</span>
-                    </div>
                     <div id="liveTimer" class="live-timer hidden">0:00</div>
-                    <div id="status" class="status ready">Ready to record</div>
+                    <div id="status" class="status ready">Ready to record <span class="status-today"><span
+                                class="material-symbols-outlined icon-sm">schedule</span> Today: <span
+                                id="todayTotal">0:00</span></span></div>
                     <button id="recordBtn" class="record-btn">
-                        <span class="btn-icon">🎤</span>
+                        <span class="btn-icon material-symbols-outlined">mic</span>
                         <span class="btn-text">Start Recording</span>
                     </button>
                 </section>
@@ -39,12 +46,12 @@
                 <!-- Results Section -->
                 <section id="results" class="results hidden">
                     <div class="result-card">
-                        <h2>📝 Your Speech</h2>
+                        <h2><span class="material-symbols-outlined">text_snippet</span> Your Speech</h2>
                         <div id="transcript" class="transcript"></div>
                     </div>
 
                     <div class="result-card">
-                        <h2>💡 AI Feedback</h2>
+                        <h2><span class="material-symbols-outlined">lightbulb</span> AI Feedback</h2>
                         <div id="feedback" class="feedback"></div>
                     </div>
 
@@ -54,28 +61,37 @@
 
             <footer>
                 <p>Open source on <a href="https://github.com/chymmike/VoiceVault" target="_blank">GitHub</a> • Made by
-                    <a href="https://www.chymmike.com/" target="_blank">chymmike</a></p>
+                    <a href="https://www.chymmike.com/" target="_blank" class="author-link">
+                        <img src="/static/images/author-icon.png" alt="Mike Chen" class="author-icon">Mike Chen
+                    </a>
+                </p>
             </footer>
+        </div>
+
+        <!-- Panel Toggle Buttons (fixed on right edge) -->
+        <div class="panel-toggles">
+            <button class="panel-toggle-btn" data-tab="dictionary" title="Dictionary"><span
+                    class="material-symbols-outlined">menu_book</span></button>
+            <button class="panel-toggle-btn" data-tab="stats" title="Stats"><span
+                    class="material-symbols-outlined">bar_chart</span></button>
         </div>
 
         <!-- Side Panel -->
         <aside id="sidePanel" class="side-panel">
-            <div class="panel-toggles">
-                <button class="panel-toggle-btn" data-tab="dictionary" title="Dictionary">📖</button>
-                <button class="panel-toggle-btn" data-tab="stats" title="Stats">📊</button>
-            </div>
             <div class="panel-content">
                 <div class="panel-tabs">
-                    <button class="panel-tab active" data-tab="dictionary">📖</button>
-                    <button class="panel-tab" data-tab="stats">📊</button>
+                    <button class="panel-tab active" data-tab="dictionary"><span
+                            class="material-symbols-outlined">menu_book</span></button>
+                    <button class="panel-tab" data-tab="stats"><span
+                            class="material-symbols-outlined">bar_chart</span></button>
                 </div>
 
                 <!-- Dictionary Tab -->
                 <div id="dictionaryTab" class="tab-content active">
-                    <h2>📖 Dictionary</h2>
+                    <h2><span class="material-symbols-outlined">menu_book</span> Dictionary</h2>
                     <div class="dict-search">
                         <input type="text" id="dictInput" placeholder="Enter a word..." autocomplete="off">
-                        <button id="dictSearchBtn">🔍</button>
+                        <button id="dictSearchBtn"><span class="material-symbols-outlined">search</span></button>
                     </div>
                     <div id="dictResult" class="dict-result">
                         <p class="dict-placeholder">Type a word to look up its definition</p>
@@ -84,7 +100,7 @@
 
                 <!-- Stats Tab -->
                 <div id="statsTab" class="tab-content">
-                    <h2>📊 Practice Activity</h2>
+                    <h2><span class="material-symbols-outlined">bar_chart</span> Practice Activity</h2>
                     <p class="heatmap-label">Last 12 weeks</p>
                     <div id="heatmapGrid" class="heatmap-grid"></div>
                     <div class="heatmap-legend">

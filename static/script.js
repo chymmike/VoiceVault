@@ -24,9 +24,9 @@ const savedPathEl = document.getElementById('savedPath');
 // =============================================================================
 
 const UI_STATES = {
-    READY: { text: 'Ready to record', class: 'ready', btnText: 'Start Recording' },
-    RECORDING: { text: '🔴 Recording...', class: 'recording', btnText: 'Stop Recording' },
-    PROCESSING: { text: '⏳ Processing...', class: 'processing', btnText: 'Processing...' }
+    READY: { text: 'Ready to record', class: 'ready', btnText: 'Start Recording', icon: 'mic' },
+    RECORDING: { text: 'Recording...', class: 'recording', btnText: 'Stop Recording', icon: 'stop_circle' },
+    PROCESSING: { text: 'Processing...', class: 'processing', btnText: 'Processing...', icon: 'hourglass_empty' }
 };
 
 // =============================================================================
@@ -99,9 +99,18 @@ updateTodayDisplay();
 
 function updateUI(state) {
     const config = UI_STATES[state];
-    statusEl.textContent = config.text;
+
+    if (state === 'READY') {
+        // Preserve Today stats in the status line (no parentheses, color difference is enough)
+        const todayTime = formatTime(getTodaySeconds());
+        statusEl.innerHTML = `${config.text} <span class="status-today"><span class="material-symbols-outlined icon-sm">schedule</span> Today: <span id="todayTotal">${todayTime}</span></span>`;
+    } else {
+        statusEl.textContent = config.text;
+    }
+
     statusEl.className = `status ${config.class}`;
     recordBtn.querySelector('.btn-text').textContent = config.btnText;
+    recordBtn.querySelector('.btn-icon').textContent = config.icon;
     recordBtn.className = `record-btn ${config.class}`;
     recordBtn.disabled = state === 'PROCESSING';
 }
@@ -179,10 +188,11 @@ function displayResults(result) {
         transcriptEl.textContent = result.transcript;
     }
     if (result.feedback) {
-        feedbackEl.innerHTML = result.feedback.replace(/\n/g, '<br>');
+        // Use marked.js to render Markdown
+        feedbackEl.innerHTML = marked.parse(result.feedback);
     }
     if (result.saved_to) {
-        savedPathEl.innerHTML = `💾 Saved to: <span class="clickable-path">${result.saved_to}</span>`;
+        savedPathEl.innerHTML = `<span class="material-symbols-outlined icon-sm">save</span> Saved to: <span class="clickable-path">${result.saved_to}</span>`;
         savedPathEl.style.cursor = 'pointer';
         savedPathEl.onclick = () => {
             fetch('/open-logs');
@@ -212,6 +222,7 @@ updateUI('READY');
 // =============================================================================
 
 const sidePanel = document.getElementById('sidePanel');
+const panelToggles = document.querySelector('.panel-toggles');
 const panelToggleBtns = document.querySelectorAll('.panel-toggle-btn');
 const panelTabs = document.querySelectorAll('.panel-tab');
 const tabContents = document.querySelectorAll('.tab-content');
@@ -263,10 +274,12 @@ panelToggleBtns.forEach(btn => {
         if (isOpen && currentTab === tabName) {
             // Close if clicking same tab
             sidePanel.classList.remove('open');
+            panelToggles.classList.remove('panel-open');
             panelToggleBtns.forEach(b => b.classList.remove('active'));
         } else {
             // Open and switch to tab
             sidePanel.classList.add('open');
+            panelToggles.classList.add('panel-open');
             switchToTab(tabName);
             if (tabName === 'dictionary') {
                 dictInput.focus();
@@ -278,6 +291,7 @@ panelToggleBtns.forEach(btn => {
 // Header stats click -> open Stats tab
 headerStats.addEventListener('click', () => {
     sidePanel.classList.add('open');
+    panelToggles.classList.add('panel-open');
     switchToTab('stats');
 });
 
@@ -298,7 +312,7 @@ async function searchDictionary() {
     const word = dictInput.value.trim().toLowerCase();
     if (!word) return;
 
-    dictResult.innerHTML = '<p class="dict-loading">🔍 Looking up...</p>';
+    dictResult.innerHTML = '<p class="dict-loading"><span class="material-symbols-outlined">search</span> Looking up...</p>';
 
     try {
         const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
@@ -310,7 +324,7 @@ async function searchDictionary() {
         const data = await response.json();
         displayDictResult(data[0]);
     } catch (err) {
-        dictResult.innerHTML = `<p class="dict-error">❌ Word not found: "${word}"</p>`;
+        dictResult.innerHTML = `<p class="dict-error"><span class="material-symbols-outlined">error</span> Word not found: "${word}"</p>`;
     }
 }
 
@@ -324,7 +338,7 @@ function displayDictResult(entry) {
             <div class="dict-word">${entry.word}</div>
             <div class="dict-phonetic">
                 <span>${phonetic}</span>
-                ${audioUrl ? `<button class="dict-audio-btn" onclick="playDictAudio('${audioUrl}')" title="Play pronunciation">🔊</button>` : ''}
+                ${audioUrl ? `<button class="dict-audio-btn" onclick="playDictAudio('${audioUrl}')" title="Play pronunciation"><span class="material-symbols-outlined">volume_up</span></button>` : ''}
             </div>
     `;
 
