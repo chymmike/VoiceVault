@@ -1,20 +1,39 @@
-# 🎙️ VoiceVault
+# <img src="static/images/header-logo.png" width="36" align="middle"/> VoiceVault
 
 **AI feedback on your speaking. Saved locally. Analyze anytime.**
 
 A local-first English speaking practice app. Record yourself, get instant AI corrections, and own all your data as Markdown files.
 
+## 🎯 Visual Showcase
+
+### 1. Instant AI Feedback
+Direct, formatted corrections on your grammar, vocabulary, and naturalness.
+
+![AI Feedback Demo](static/screenshots/demo.png)
+
+### 2. Distraction-Free Recording
+Clean, dark-mode interface designed for focus.
+
 ![Main Interface](static/screenshots/main.png)
+
+### 3. Long-term Tracking
+GitHub-style heatmap and streak tracking to keep you motivated.
 
 ![Heatmap Stats](static/screenshots/heatmap.png)
 
-![AI Feedback Demo](static/screenshots/demo.png)
+---
+
 ## ✨ Features
 
 ### Core
 - 🎤 **Voice Recording** — Record directly in browser, no installs needed
-- 🤖 **AI Feedback** — Gemini 2.5 Flash (free tier) provides grammar corrections + natural expression suggestions
+- 🤖 **AI Feedback** — Gemini 2.5 Flash (free tier) provides **formatted Markdown feedback** with grammar corrections + natural expression suggestions
 - 📝 **Markdown Logs** — All sessions saved as local `.md` files （AI-friendly)
+
+### Experience
+- 🎨 **Distraction-Free UI** — Elegant dark mode with gold accents, designed for focus (resembling a premium blog aesthetic)
+- ⚡ **Low Friction** — "Ready to record" in seconds, minimized clicks
+- 📱 **Responsive** — Works on desktop and tablet sizes
 
 ### Stats & Analytics
 - 🔥 **Streak Tracking** — See your consecutive practice days
@@ -22,7 +41,7 @@ A local-first English speaking practice app. Record yourself, get instant AI cor
 - ⏱️ **Practice Timer** — Live recording timer + daily totals
 
 ### Tools
-- 📖 **Dictionary Lookup** — Search definitions, phonetics, and play pronunciations
+- 📖 **Dictionary Lookup** — Search definitions, phonetics, and play pronunciations (Side Panel)
 - 💾 **One-Click Open** — Click "Saved to" to open your logs folder
 
 ---
@@ -70,7 +89,7 @@ Get your free API key: https://aistudio.google.com/app/apikey
 python app.py
 ```
 
-Open http://localhost:5000 in your browser.
+Open http://localhost:5001 in your browser (default port might vary).
 
 **For development (with hot reload):**
 ```bash
@@ -87,6 +106,9 @@ VoiceVault/
 ├── requirements.txt    # Python dependencies
 ├── .env.example        # API key template
 ├── static/
+│   ├── images/         # Logos and icons
+│   ├── fonts/          # Self-hosted fonts (Material Symbols)
+│   ├── screenshots/    # README assets
 │   ├── index.html      # Frontend UI
 │   ├── style.css       # Styling
 │   └── script.js       # Recording + UI logic
@@ -115,6 +137,7 @@ Only transcripts are sent to Gemini API for feedback.
 | AI Feedback | [Google Gemini](https://ai.google.dev/) |
 | Backend | Flask (Python) |
 | Frontend | Vanilla HTML/CSS/JS |
+| Formatting | [marked.js](https://marked.js.org/) |
 | Dictionary | [Free Dictionary API](https://dictionaryapi.dev/) |
 
 ---
